@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="windowStyles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/45ba6f1765.js" crossorigin="anonymous"></script>
+
+    <script src="windowformatter.js" defer></script>
+    <script src="backgroundScroller.js" defer></script>
+    <script src="objectFormatter.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="row-center">
+            <div class="header-button">
+                <i class="fa-solid fa-play"></i>
+            </div>
+            <div class="header-button">
+                <i class="fa-solid fa-pause"></i>
+            </div>
+            <div class="header-button">
+                <i class="fa-solid fa-forward-step"></i>
+            </div>
+        </div>
+
+        <window>
+            <title>Home</title>
+        </window>
+    </header>
+
+    <div class="background"></div> 
+
+    <section class="center-elements" style="height: 75vh; width:100%;">
+        <div class="row">
+            <window>
+                <title>Profile</title>
+
+                <img class="img-square"style="--size:20vmax" src="pfp_placeholder.webp">
+            </window>
+
+            <window>
+                <title>About</title>
+            
+                <ul>
+                    <li>Web Developer</li>
+                    <li>Game Developer</li>
+                    <li>Artist</li>
+                </ul>
+            </window>
+        </div>
+    </section>
+
+    <section id="home-section-deco" style="width: 100vw; height: 64px;">
+
+        <object id="snow" data-xpos="0px" data-ypos="0px">
+            <img class="repeat-x" style="--img: url(Snow.png); height: 64px">
+        </object>
+    </section>
+        
+    <footer>
+        <window>
+            <title>Navigation</title>
+            <title>Animator</title>
+            <title>Profiler</title>
+
+            <div id="links" class="row-left">
+                <a class="page-link">
+                    <i class="fa-brands fa-unity"></i>
+                    <p>Home</p>
+                </a>
+                <a class="page-link">
+                    <i class="fa-brands fa-unity"></i>
+                    <p>Websites</p>
+                </a>
+                <a class="page-link">
+                    <i class="fa-brands fa-unity"></i>
+                    <p>Games</p>
+                </a>
+                <a class="page-link">
+                    <i class="fa-brands fa-unity"></i>
+                    <p>Art</p>
+                </a>
+            </div>
+            
+        </window>
+    </footer>
+</body>
+</html>
