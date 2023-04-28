@@ -1,71 +1,79 @@
-const windows = document.querySelectorAll("window");
-windows.forEach(x => formatWindow(x));
+
+const windows = document.getElementsByTagName("window");
+for(var i = 0; i < windows.length; i++)
+    formatWindow(windows[i]);
 
 function formatWindow(item){
-    const content = findContent(item);
-    const title = formatHeaderItems(findHeaderItems(item));
+    const tabs = findTabs(item);
+    const headerDiv = document.createElement("div");
+    const contentDiv = document.createElement("div");
 
-    console.log(findHeaderItems(item));
+    headerDiv.classList += "header";
+    contentDiv.classList += "content-area";
 
+    tabs.forEach(x => formatTab(contentDiv, headerDiv, x));
+
+    item.appendChild(headerDiv);
+    item.appendChild(contentDiv);
+}
+
+function formatTab(content, header, tab)
+{
+    const titleName = getTabHeader(tab);
+    
     const titleDiv = document.createElement("div");
     const contentDiv = document.createElement("div");
 
-    titleDiv.classList += "header";
     contentDiv.classList += "content";
 
-    title.forEach(x => titleDiv.appendChild(x));
-    content.forEach(x => contentDiv.appendChild(x));
-
-    item.appendChild(titleDiv);
-    item.appendChild(contentDiv)
-}
-
-function formatHeaderItems(headerItems){
-    const formatedElements = [];
-    for(const item of headerItems)
+    const cont = getTabContent(tab);
+    for(var i = 0; i < cont.length; i++)
     {
-        var element;
-        switch(item.tagName){
-            case "TITLE":
-                element = document.createElement("div");
-                element.innerHTML = item.innerHTML;
-                element.classList += "title";
-            break;
+        contentDiv.appendChild(cont[i]);
+    }
+
+    titleDiv.classList += "title";
+    titleDiv.innerText = titleName;
+
+    titleDiv.addEventListener("click", () => selectTab(titleDiv, contentDiv));
+
+    header.appendChild(titleDiv);
+    content.appendChild(contentDiv);
+
+    tab.parentElement.removeChild(tab);
     
-            case "TAB":
-                element = document.createElement("a");
-                element.innerHTML = item.innerHTML;
-                element.href = item.href;
-            break;
-        }
-
-        item.parentElement.removeChild(item);
-        formatedElements.push(element);
-    }
-
-    return formatedElements;
 }
 
-
-function findHeaderItems(_window)
+function findTabs(item)
 {
-    const elements = [];
-    for(const child of _window.children)
-        if(child.tagName === "TITLE" || child.tagName === "TAB") elements.push(child);;
+    console.log(item);
+    const tabs = [];
+    for(const child of item.children)
+        if(child.tagName === "TAB") tabs.push(child);
          
-    return elements;
+    return tabs;
 }
 
+function getTabHeader(tab){
+   return tab.dataset.title;
+}
 
-function findContent(item){
-    const content = [];
-    for(const child of item.children)
+function getTabContent(tab){
+    return [...tab.children];
+}
+
+var currentTab = null;
+function selectTab(tabHeader, tabContent)
+{   
+    if(currentTab !== null)
     {
-        if(child.tagName !== "TITLE" && child.tagName !== "TAB")
-        {
-            content.push(child);
-        }
+        currentTab.tabHeader.classList.remove("selected");
+        currentTab.tabContent.classList.remove("selected");
     }
 
-    return content;
+    currentTab = {tabHeader, tabContent};
+  
+    tabHeader.classList.add("selected");
+    tabContent.classList.add("selected");
+    
 }

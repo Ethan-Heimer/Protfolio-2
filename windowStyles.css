@@ -49,25 +49,49 @@ window > .header > *{
     margin-inline: 1px ;
 }
 
-window > .header > .title:nth-child(1){
-    background-color: var(--WindowHiglight);
-    color: white;
-}
-
 window > .header > .title{
     background-color: var(--WindowBase);
     color: var(--WindowPsydoTitleFontColor);
+}
+
+window > .header > .title:not(.selected):hover{
+    background-color: var(--WindowTabHoverColor);
 }
 
 window > .header > a:hover{
  background-color:  var(--WindowTabHoverColor);
 }
 
-window > .content{
-    background-color: var(--WindowHiglight);
-    padding-inline: 1.5rem;
+
+
+window > .content-area{
+    width: inherit;
+   
     padding-top: .25rem;
     padding-bottom: 1rem;
 
     min-height: 2rem;
+
+    position: relative;
+
+    height: fit-content;
+}
+
+window > .content-area > .content
+{
+    padding-inline: 1.5rem;
+    background-color: var(--WindowHiglight);
+    width: 100vw;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+}
+
+window > .content-area > .selected{
+    opacity: 1;
+}
+
+window > .header > .selected{
+    background-color: var(--WindowHiglight);
+    color: white;
 }
