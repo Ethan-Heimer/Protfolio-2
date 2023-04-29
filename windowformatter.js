@@ -1,79 +1,117 @@
+class windowElement
+{
+    constructor(_windowElement)
+    {
+        this.windowElement = _windowElement; 
+        this.tabs = this.findTabs();
+
+        const header = document.createElement("div");
+        header.classList.add("header");
+
+        const contentArea = document.createElement("div");
+        contentArea.classList.add("content-area");
+
+        for(const tab of this.tabs)
+        {
+            header.appendChild(tab.getTitleElement());
+            contentArea.appendChild(tab.getContentElement());
+        }
+
+        this.selectTab(this.tabs[0]);
+
+        _windowElement.appendChild(header);
+        _windowElement.appendChild(contentArea);
+        
+    }
+
+    #selectedTab = null;
+    selectTab(tab)
+    {
+        console.log("select");
+        if(this.#selectedTab)
+        {
+            this.#selectedTab.onUnselect();
+        }
+
+        this.#selectedTab = tab;
+        this.#selectedTab.onSelect();
+    }
+
+    findTabs()
+    {
+        const tabs = [];
+        for(const child of this.windowElement.children)
+        {
+            if(child.tagName == "TAB")
+                tabs.push(new tab(this, child));
+        }
+        return tabs; 
+    }
+}
+
+class tab
+{
+    constructor(parentWindow, element)
+    {
+        this.parentWindow = parentWindow;
+        this.element = element;
+
+        this.title = element.dataset.title;
+        this.content = element.children;
+
+        this.titleElement = this.#createTitleElement();
+        this.contentElement = this.#createContentElement();
+
+        this.titleElement.addEventListener("click",() => this.parentWindow.selectTab(this));
+
+    }
+
+    getTitleElement()
+    {
+        return this.titleElement;
+    }
+
+    getContentElement()
+    {
+        return this.contentElement;
+    }
+
+    onSelect()
+    {
+        this.getContentElement().classList.add("selected");
+        this.getTitleElement().classList.add("selected");
+    }
+
+    onUnselect()
+    {
+        this.getContentElement().classList.remove("selected");
+        this.getTitleElement().classList.remove("selected");
+    }
+
+    #createTitleElement()
+    {
+        const titleDiv = document.createElement("div");
+        titleDiv.innerText = this.title;
+        titleDiv.classList.add("title");
+
+        return titleDiv;
+    }
+
+    #createContentElement()
+    {
+        const contentDiv = document.createElement("div");
+        contentDiv.classList.add("content");
+
+        const content = [...this.content];
+        for(var i = 0; i < content.length; i++)
+        {
+            contentDiv.appendChild(content[i]);
+        }
+
+        return contentDiv;
+    }
+}
 
 const windows = document.getElementsByTagName("window");
 for(var i = 0; i < windows.length; i++)
-    formatWindow(windows[i]);
-
-function formatWindow(item){
-    const tabs = findTabs(item);
-    const headerDiv = document.createElement("div");
-    const contentDiv = document.createElement("div");
-
-    headerDiv.classList += "header";
-    contentDiv.classList += "content-area";
-
-    tabs.forEach(x => formatTab(contentDiv, headerDiv, x));
-
-    item.appendChild(headerDiv);
-    item.appendChild(contentDiv);
-}
-
-function formatTab(content, header, tab)
-{
-    const titleName = getTabHeader(tab);
-    
-    const titleDiv = document.createElement("div");
-    const contentDiv = document.createElement("div");
-
-    contentDiv.classList += "content";
-
-    const cont = getTabContent(tab);
-    for(var i = 0; i < cont.length; i++)
-    {
-        contentDiv.appendChild(cont[i]);
-    }
-
-    titleDiv.classList += "title";
-    titleDiv.innerText = titleName;
-
-    titleDiv.addEventListener("click", () => selectTab(titleDiv, contentDiv));
-
-    header.appendChild(titleDiv);
-    content.appendChild(contentDiv);
-
-    tab.parentElement.removeChild(tab);
-    
-}
-
-function findTabs(item)
-{
-    console.log(item);
-    const tabs = [];
-    for(const child of item.children)
-        if(child.tagName === "TAB") tabs.push(child);
-         
-    return tabs;
-}
-
-function getTabHeader(tab){
-   return tab.dataset.title;
-}
-
-function getTabContent(tab){
-    return [...tab.children];
-}
-
-var currentTab = null;
-function selectTab(tabHeader, tabContent)
-{   
-    if(currentTab !== null)
-    {
-        currentTab.tabHeader.classList.remove("selected");
-        currentTab.tabContent.classList.remove("selected");
-    }
-
-    currentTab = {tabHeader, tabContent};
-  
-    tabHeader.classList.add("selected");
-    tabContent.classList.add("selected");
-    
-}
+    new windowElement(windows[i]);
