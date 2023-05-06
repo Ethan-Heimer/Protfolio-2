@@ -1,0 +1,95 @@
+:root{
+    --WindowHiglight: #312F2F;
+    --WindowBase: #1F1E1E;
+    --WindowTitleCornerRadius: 4px;
+   
+    --WindowFontSize: 1rem;
+    --WindowTabHoverColor: #262729;
+
+    --WindowPsydoTitleFontColor: #999999;
+}
+
+window{
+    width: fit-content;
+    height: fit-content;
+
+    font-size: var(--WindowFontSize);
+    font-weight: 500;
+
+    background-color: var(--WindowBase);
+
+    position: relative;
+    z-index: 20;
+}
+
+window > .header{
+    background-color: var(--WindowBase);
+    display: flex;
+
+
+    border-top-left-radius: var(--WindowTitleCornerRadius);
+    border-top-right-radius: var(--WindowTitleCornerRadius);
+}
+
+
+
+window > .header > *{
+   
+    width: fit-content;
+    border-top-left-radius: var(--WindowTitleCornerRadius);
+    border-top-right-radius: var(--WindowTitleCornerRadius);
+    
+    font-size: var(--WindowFontSize);
+    font-weight: 500;
+    padding-inline: 1.5rem;
+    padding-block: .25rem;
+
+    text-decoration: none;
+
+    margin-inline: 1px ;
+}
+
+window > .header > .title{
+    background-color: var(--WindowBase);
+    color: var(--WindowPsydoTitleFontColor);
+}
+
+window > .header > .title:not(.selected):hover{
+    background-color: var(--WindowTabHoverColor);
+}
+
+window > .header > a:hover{
+ background-color:  var(--WindowTabHoverColor);
+}
+
+
+
+window > .content-area{
+    width: inherit;
+   
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: var(--WindowHiglight);
+    min-height: 2rem;
+
+    position: relative;
+
+    height: fit-content;
+}
+
+window > .content-area > .content
+{
+    padding-inline: 1.5rem;
+   
+    opacity: 0;
+    position: absolute;
+}
+
+window > .content-area > .selected{
+    opacity: 1;
+}
+
+window > .header > .selected{
+    background-color: var(--WindowHiglight);
+    color: white;
+}

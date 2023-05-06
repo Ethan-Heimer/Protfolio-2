@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Formatters/windowStyles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/45ba6f1765.js" crossorigin="anonymous"></script>
+
+    <script src="../Formatters/windowformatter.js" defer></script>
+    <script src="../Formatters/objectFormatter.js" defer></script>
+</head>
+<body>
+    
+    <header>
+        <div class="row-center">
+            <div class="header-button">
+                <i class="fa-solid fa-play"></i>
+            </div>
+            <div class="header-button">
+                <i class="fa-solid fa-pause"></i>
+            </div>
+            <div class="header-button">
+                <i class="fa-solid fa-forward-step"></i>
+            </div>
+        </div>
+
+        <window data-width="100vw" data-height="30px">
+            <tab data-title="Websites"></tab>
+        </window>
+    </header>
+
+    <div class="background" style="--background: url('../Home/Snow Forest Background.png')"></div> 
+
+    <section class="center-elements" style="height: 75vh; width:100%;">
+        <div class="row-tri">
+            <window  data-width="200px" data-height="80vh">
+                <tab data-title="Inspector">
+                    <p>hello</p>
+                    <p>hello</p>
+                    <p>hello</p>
+                    <p>hello</p>
+                    <p>hello</p>
+                    <p>hello</p>
+                    <p>hello</p>
+                    <p>hello</p>
+                </tab>
+            </window>
+
+            <window data-width="22rem" data-height="340px">
+               <tab data-title="Picture">
+                    <img src="pfp_placeholder.webp" class="img-square" style="--size:300px">
+               </tab>
+            </window>
+        </div>
+    </section>
+
+    <section id="home-section-deco" style="width: 100vw; height: 64px;">
+
+        <object id="snow" data-xpos="0px" data-ypos="0px">
+            <img class="repeat-x" style="--img: url(../Home/Snow.png); height: 64px">
+        </object>
+    </section>
+        
+    <footer>
+        <window data-width="100vw" data-height="200px">
+            <tab data-title="Navigation">
+                <div id="links" class="row-left">
+                    <a class="page-link">
+                        <i class="fa-brands fa-unity"></i>
+                        <p>Home</p>
+                    </a>
+                    <a class="page-link">
+                        <i class="fa-brands fa-unity"></i>
+                        <p>Websites</p>
+                    </a>
+                    <a class="page-link">
+                        <i class="fa-brands fa-unity"></i>
+                        <p>Games</p>
+                    </a>
+                    <a class="page-link">
+                        <i class="fa-brands fa-unity"></i>
+                        <p>Art</p>
+                    </a>
+                </div>
+            </tab>
+            
+        </window>
+    </footer>
+</body>
+</html>
